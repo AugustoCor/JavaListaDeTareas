@@ -42,7 +42,6 @@ public class Programa extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
-        setResizable(false);
 
         jPanel1.setLayout(null);
 
@@ -108,18 +107,20 @@ public class Programa extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
    
     private void JButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton1ActionPerformed
         AreaTexto.append("* "+CampoTexto.getText()+"\n");
+        CampoTexto.setText("");
         
     }//GEN-LAST:event_JButton1ActionPerformed
 
@@ -156,6 +157,7 @@ public class Programa extends javax.swing.JFrame {
     private void CampoTextoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CampoTextoKeyReleased
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             AreaTexto.append("* "+CampoTexto.getText()+"\n");
+            CampoTexto.setText("");
         }
         else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
             try {
