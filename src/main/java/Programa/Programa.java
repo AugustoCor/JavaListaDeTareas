@@ -4,6 +4,9 @@
  */
 package Programa;
 
+import java.awt.event.KeyEvent;
+import javax.swing.text.BadLocationException;
+
 /**
  *
  * @author aucor
@@ -35,6 +38,7 @@ public class Programa extends javax.swing.JFrame {
         CampoTexto = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         AreaTexto = new javax.swing.JTextArea();
+        JButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -55,30 +59,50 @@ public class Programa extends javax.swing.JFrame {
             }
         });
         jPanel1.add(JButton1);
-        JButton1.setBounds(440, 140, 90, 40);
+        JButton1.setBounds(440, 120, 100, 30);
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Arial", 1, 19)); // NOI18N
         jLabel2.setText("Ingrese su tarea:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(20, 100, 160, 22);
+        jLabel2.setBounds(20, 90, 180, 30);
 
-        CampoTexto.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        CampoTexto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         CampoTexto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CampoTextoActionPerformed(evt);
             }
         });
+        CampoTexto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                CampoTextoKeyReleased(evt);
+            }
+        });
         jPanel1.add(CampoTexto);
-        CampoTexto.setBounds(20, 130, 400, 60);
+        CampoTexto.setBounds(20, 130, 400, 50);
 
         AreaTexto.setEditable(false);
         AreaTexto.setColumns(20);
         AreaTexto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         AreaTexto.setRows(5);
+        AreaTexto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                AreaTextoKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(AreaTexto);
 
         jPanel1.add(jScrollPane1);
         jScrollPane1.setBounds(20, 200, 520, 230);
+
+        JButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        JButton2.setText("Eliminar");
+        JButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButton2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(JButton2);
+        JButton2.setBounds(440, 160, 100, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -93,14 +117,68 @@ public class Programa extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+   
     private void JButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton1ActionPerformed
         AreaTexto.append("* "+CampoTexto.getText()+"\n");
+        
     }//GEN-LAST:event_JButton1ActionPerformed
 
     private void CampoTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoTextoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CampoTextoActionPerformed
+
+    private void JButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton2ActionPerformed
+        try {
+            int conteoLineas = AreaTexto.getLineCount();
+            
+            String textoCompleto = AreaTexto.getText();
+            
+            if (textoCompleto.endsWith("\n")) {
+                conteoLineas--;
+            }
+            
+            if (conteoLineas > 0) {
+                int ultimaLinea = conteoLineas - 1;
+                int inicio = AreaTexto.getLineStartOffset(ultimaLinea);
+                int fin = AreaTexto.getLineEndOffset(ultimaLinea);
+                
+                //Eliminar la última linea
+                AreaTexto.replaceRange("", inicio, fin);
+            }
+        } catch (BadLocationException ex) {
+        }
+    }//GEN-LAST:event_JButton2ActionPerformed
+
+    private void AreaTextoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AreaTextoKeyReleased
+
+    }//GEN-LAST:event_AreaTextoKeyReleased
+
+    private void CampoTextoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CampoTextoKeyReleased
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            AreaTexto.append("* "+CampoTexto.getText()+"\n");
+        }
+        else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
+            try {
+            int conteoLineas = AreaTexto.getLineCount();
+            
+            String textoCompleto = AreaTexto.getText();
+            
+            if (textoCompleto.endsWith("\n")) {
+                conteoLineas--;
+            }
+            
+            if (conteoLineas > 0) {
+                int ultimaLinea = conteoLineas - 1;
+                int inicio = AreaTexto.getLineStartOffset(ultimaLinea);
+                int fin = AreaTexto.getLineEndOffset(ultimaLinea);
+                
+                //Eliminar la última linea
+                AreaTexto.replaceRange("", inicio, fin);
+            }
+        } catch (BadLocationException ex) {
+        }
+        }
+    }//GEN-LAST:event_CampoTextoKeyReleased
 
     /**
      * @param args the command line arguments
@@ -131,6 +209,7 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JTextArea AreaTexto;
     private javax.swing.JTextField CampoTexto;
     private javax.swing.JButton JButton1;
+    private javax.swing.JButton JButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
