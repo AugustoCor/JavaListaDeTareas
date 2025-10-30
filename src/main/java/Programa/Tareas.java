@@ -12,11 +12,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.text.BadLocationException;
 
-public class Programa extends javax.swing.JFrame {
+public class Tareas extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Programa.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Tareas.class.getName());
 
-    public Programa() throws FileNotFoundException {
+    public Tareas() throws FileNotFoundException {
         initComponents();
         cargarDatos();
     }
@@ -58,6 +58,7 @@ public class Programa extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         AreaTexto = new javax.swing.JTextArea();
         JButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -88,7 +89,7 @@ public class Programa extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial", 1, 19)); // NOI18N
         jLabel2.setText("Ingrese su tarea:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(20, 90, 180, 30);
+        jLabel2.setBounds(20, 90, 170, 30);
 
         CampoTexto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         CampoTexto.addActionListener(new java.awt.event.ActionListener() {
@@ -102,7 +103,7 @@ public class Programa extends javax.swing.JFrame {
             }
         });
         jPanel1.add(CampoTexto);
-        CampoTexto.setBounds(20, 130, 400, 50);
+        CampoTexto.setBounds(20, 140, 400, 40);
 
         AreaTexto.setEditable(false);
         AreaTexto.setColumns(20);
@@ -127,6 +128,15 @@ public class Programa extends javax.swing.JFrame {
         });
         jPanel1.add(JButton2);
         JButton2.setBounds(440, 160, 100, 30);
+
+        jButton1.setText("Volver");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(10, 10, 72, 23);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -211,9 +221,16 @@ public class Programa extends javax.swing.JFrame {
         try {
             guardarDatos();
         } catch (IOException ex) {
-            System.getLogger(Programa.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+            System.getLogger(Tareas.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Inicio newframe = new Inicio();
+        newframe.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -236,9 +253,9 @@ public class Programa extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             try {
-                new Programa().setVisible(true);
+                new Tareas().setVisible(true);
             } catch (FileNotFoundException ex) {
-                System.getLogger(Programa.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                System.getLogger(Tareas.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
             }
         });
     }
@@ -248,6 +265,7 @@ public class Programa extends javax.swing.JFrame {
     private javax.swing.JTextField CampoTexto;
     private javax.swing.JButton JButton1;
     private javax.swing.JButton JButton2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
