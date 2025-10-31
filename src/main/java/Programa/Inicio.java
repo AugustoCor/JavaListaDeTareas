@@ -44,7 +44,9 @@ public class Inicio extends javax.swing.JFrame {
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setLayout(null);
 
-        boton2.setText("jButton1");
+        boton2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        boton2.setText("Proximamente...");
+        boton2.setEnabled(false);
         boton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boton2ActionPerformed(evt);
@@ -53,7 +55,9 @@ public class Inicio extends javax.swing.JFrame {
         jPanel1.add(boton2);
         boton2.setBounds(210, 150, 160, 153);
 
-        boton3.setText("jButton1");
+        boton3.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        boton3.setText("Proximamente...");
+        boton3.setEnabled(false);
         boton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boton3ActionPerformed(evt);
@@ -62,7 +66,8 @@ public class Inicio extends javax.swing.JFrame {
         jPanel1.add(boton3);
         boton3.setBounds(400, 150, 160, 153);
 
-        boton1.setText("jButton1");
+        boton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        boton1.setText("Tareas");
         boton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boton1ActionPerformed(evt);
