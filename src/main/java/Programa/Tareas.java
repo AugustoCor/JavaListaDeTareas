@@ -10,43 +10,37 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import javax.swing.DefaultListModel;
+import javax.swing.JCheckBox;
 import javax.swing.text.BadLocationException;
 
 public class Tareas extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Tareas.class.getName());
-
+    
+    
+    
     public Tareas() throws FileNotFoundException {
         initComponents();
+        DefaultListModel modelo = new DefaultListModel();
+        jList1.setModel(modelo);
+        jList1.setCellRenderer(new TareaRenderer());
         cargarDatos();
     }
     
-    private void guardarDatos() throws IOException {
-        try (FileWriter escribir = new FileWriter("ventana.txt")) {
-            escribir.write(AreaTexto.getText());
-        } catch (IOException e) {
-            System.out.println("Error: "+e.getMessage());
-        }
-    }
-    
     private void cargarDatos() throws FileNotFoundException {
-        try (BufferedReader lector = new BufferedReader(new FileReader("ventana.txt"))) {
-            StringBuilder sb = new StringBuilder();
+        DefaultListModel modelo = (DefaultListModel) jList1.getModel();
+
+        try (BufferedReader br = new BufferedReader(new FileReader("tareas.txt"))) {
             String linea;
-            
-            while ((linea = lector.readLine()) != null) {
-                sb.append(linea).append("\n"); // Añade la línea leída y un salto de línea
+            while ((linea = br.readLine()) != null) {
+                modelo.addElement(linea);
             }
-            
-            AreaTexto.setText(sb.toString());
-            System.out.println("Datos cargados correctamente.");
-        } catch (IOException ex) {
-            // Si el archivo no existe (primera vez que se ejecuta), o hay otro error, 
-            // simplemente se imprime el mensaje. El JTextArea quedará vacío.
-            System.err.println("No se encontró el archivo de datos o hubo un error de lectura.");
+        } catch (IOException e) {
+            System.out.println("No hay archivo todavía.");
         }
-    }
-    
+
+    }  
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -55,10 +49,13 @@ public class Tareas extends javax.swing.JFrame {
         JButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         CampoTexto = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        AreaTexto = new javax.swing.JTextArea();
         JButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        JButton3 = new javax.swing.JButton();
+        JButton4 = new javax.swing.JButton();
+        JButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -68,7 +65,7 @@ public class Tareas extends javax.swing.JFrame {
             }
         });
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 153));
         jPanel1.setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -84,12 +81,12 @@ public class Tareas extends javax.swing.JFrame {
             }
         });
         jPanel1.add(JButton1);
-        JButton1.setBounds(440, 120, 100, 30);
+        JButton1.setBounds(10, 130, 90, 30);
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 19)); // NOI18N
         jLabel2.setText("Ingrese su tarea:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(20, 90, 170, 30);
+        jLabel2.setBounds(20, 50, 170, 30);
 
         CampoTexto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         CampoTexto.addActionListener(new java.awt.event.ActionListener() {
@@ -103,31 +100,17 @@ public class Tareas extends javax.swing.JFrame {
             }
         });
         jPanel1.add(CampoTexto);
-        CampoTexto.setBounds(20, 140, 400, 40);
-
-        AreaTexto.setEditable(false);
-        AreaTexto.setColumns(20);
-        AreaTexto.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        AreaTexto.setRows(5);
-        AreaTexto.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                AreaTextoKeyReleased(evt);
-            }
-        });
-        jScrollPane1.setViewportView(AreaTexto);
-
-        jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(20, 200, 520, 230);
+        CampoTexto.setBounds(10, 80, 530, 40);
 
         JButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        JButton2.setText("Eliminar");
+        JButton2.setText("Eliminar seleccionada");
         JButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JButton2ActionPerformed(evt);
             }
         });
         jPanel1.add(JButton2);
-        JButton2.setBounds(440, 160, 100, 30);
+        JButton2.setBounds(110, 130, 190, 30);
 
         jButton1.setText("Volver");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -137,6 +120,42 @@ public class Tareas extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1);
         jButton1.setBounds(10, 10, 72, 23);
+
+        jList1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jScrollPane1.setViewportView(jList1);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 220, 530, 210);
+
+        JButton3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        JButton3.setText("Limpiar todo");
+        JButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(JButton3);
+        JButton3.setBounds(310, 130, 130, 30);
+
+        JButton4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        JButton4.setText("Marcar");
+        JButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButton4ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(JButton4);
+        JButton4.setBounds(10, 180, 80, 30);
+
+        JButton5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        JButton5.setText("Desmarcar");
+        JButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButton5ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(JButton5);
+        JButton5.setBounds(100, 180, 110, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,72 +173,47 @@ public class Tareas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
    
     private void JButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton1ActionPerformed
-        AreaTexto.append("* "+CampoTexto.getText()+"\n");
+    DefaultListModel modelo = (DefaultListModel) jList1.getModel();
+    String texto = CampoTexto.getText().trim();
+
+    if (!texto.isEmpty()) {
+        modelo.addElement("• " + texto);
         CampoTexto.setText("");
+    }
+
         
     }//GEN-LAST:event_JButton1ActionPerformed
 
     private void CampoTextoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoTextoActionPerformed
+        JButton1.doClick(); // Simula presionar el botón
         // TODO add your handling code here:
     }//GEN-LAST:event_CampoTextoActionPerformed
 
     private void JButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton2ActionPerformed
-        try {
-            int conteoLineas = AreaTexto.getLineCount();
-            
-            String textoCompleto = AreaTexto.getText();
-            
-            if (textoCompleto.endsWith("\n")) {
-                conteoLineas--;
-            }
-            
-            if (conteoLineas > 0) {
-                int ultimaLinea = conteoLineas - 1;
-                int inicio = AreaTexto.getLineStartOffset(ultimaLinea);
-                int fin = AreaTexto.getLineEndOffset(ultimaLinea);
-                
-                //Eliminar la última linea
-                AreaTexto.replaceRange("", inicio, fin);
-            }
-        } catch (BadLocationException ex) {
-        }
+    DefaultListModel modelo = (DefaultListModel) jList1.getModel();
+    int idx = jList1.getSelectedIndex();
+
+    if (idx != -1) {
+    modelo.remove(idx);
+    }
+
     }//GEN-LAST:event_JButton2ActionPerformed
 
-    private void AreaTextoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AreaTextoKeyReleased
-
-    }//GEN-LAST:event_AreaTextoKeyReleased
-
     private void CampoTextoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CampoTextoKeyReleased
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            AreaTexto.append("* "+CampoTexto.getText()+"\n");
-            CampoTexto.setText("");
-        }
-        else if (evt.getKeyCode() == KeyEvent.VK_DELETE) {
-            try {
-            int conteoLineas = AreaTexto.getLineCount();
-            
-            String textoCompleto = AreaTexto.getText();
-            
-            if (textoCompleto.endsWith("\n")) {
-                conteoLineas--;
-            }
-            
-            if (conteoLineas > 0) {
-                int ultimaLinea = conteoLineas - 1;
-                int inicio = AreaTexto.getLineStartOffset(ultimaLinea);
-                int fin = AreaTexto.getLineEndOffset(ultimaLinea);
-                
-                //Eliminar la última linea
-                AreaTexto.replaceRange("", inicio, fin);
-            }
-        } catch (BadLocationException ex) {
-        }
-        }
+        
     }//GEN-LAST:event_CampoTextoKeyReleased
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         try {
-            guardarDatos();
+            DefaultListModel modelo = (DefaultListModel) jList1.getModel();
+            FileWriter fw = new FileWriter("tareas.txt");
+
+            for (int i = 0; i < modelo.size(); i++) {
+                fw.write(modelo.get(i).toString() + "\n");
+            }
+
+            fw.close();
+
         } catch (IOException ex) {
             System.getLogger(Tareas.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
         }
@@ -231,6 +225,40 @@ public class Tareas extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void JButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton3ActionPerformed
+        DefaultListModel modelo = (DefaultListModel) jList1.getModel();
+        modelo.clear();
+    }//GEN-LAST:event_JButton3ActionPerformed
+
+    private void JButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton4ActionPerformed
+        DefaultListModel modelo = (DefaultListModel) jList1.getModel();
+        int index = jList1.getSelectedIndex();
+
+        if (index != -1) {
+         String tarea = modelo.get(index).toString();
+
+    // Evitar marcar dos veces
+            if (!tarea.startsWith("✔")) {
+                modelo.set(index, "✔ " + tarea);
+            }
+        }
+     // TODO add your handling code here:
+    }//GEN-LAST:event_JButton4ActionPerformed
+
+    private void JButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton5ActionPerformed
+      DefaultListModel modelo = (DefaultListModel) jList1.getModel();
+      int index = jList1.getSelectedIndex();
+
+      if (index != -1) {
+          String tarea = modelo.get(index).toString();
+
+          if (tarea.startsWith("✔ ")) {
+              modelo.set(index, tarea.substring(2)); // Quita el "✔ "
+          }
+      }
+  // TODO add your handling code here:
+    }//GEN-LAST:event_JButton5ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -261,16 +289,20 @@ public class Tareas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea AreaTexto;
     private javax.swing.JTextField CampoTexto;
     private javax.swing.JButton JButton1;
     private javax.swing.JButton JButton2;
+    private javax.swing.JButton JButton3;
+    private javax.swing.JButton JButton4;
+    private javax.swing.JButton JButton5;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-  
+    
+
 }

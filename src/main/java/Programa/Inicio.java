@@ -41,30 +41,30 @@ public class Inicio extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(153, 255, 153));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setLayout(null);
 
-        boton2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        boton2.setText("Proximamente...");
-        boton2.setEnabled(false);
+        boton2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        boton2.setText("Calculadora");
+        boton2.setToolTipText("");
         boton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boton2ActionPerformed(evt);
             }
         });
         jPanel1.add(boton2);
-        boton2.setBounds(210, 150, 160, 153);
+        boton2.setBounds(200, 110, 160, 153);
 
         boton3.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        boton3.setText("Proximamente...");
-        boton3.setEnabled(false);
+        boton3.setText("Bloc de notas");
         boton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boton3ActionPerformed(evt);
             }
         });
         jPanel1.add(boton3);
-        boton3.setBounds(400, 150, 160, 153);
+        boton3.setBounds(380, 110, 160, 153);
 
         boton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         boton1.setText("Tareas");
@@ -74,22 +74,24 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         jPanel1.add(boton1);
-        boton1.setBounds(20, 150, 160, 153);
+        boton1.setBounds(20, 110, 160, 153);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel1.setText("MultiToDo");
+        jLabel1.setText("MultiTools");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(200, 20, 173, 30);
+        jLabel1.setBounds(200, 20, 175, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -97,11 +99,15 @@ public class Inicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void boton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton3ActionPerformed
-       
+       BlocNotas newframe = new BlocNotas();
+       newframe.setVisible(true);
+       this.dispose();
     }//GEN-LAST:event_boton3ActionPerformed
 
     private void boton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton2ActionPerformed
-        // TODO add your handling code here:
+        Calculadora newframe = new Calculadora();
+        newframe.setVisible(true);
+        this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_boton2ActionPerformed
 
     private void boton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton1ActionPerformed
