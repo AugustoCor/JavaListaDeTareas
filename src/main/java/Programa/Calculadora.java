@@ -296,7 +296,7 @@ public class Calculadora extends javax.swing.JFrame {
         switch (opcion) {
             case "+" -> resultado = num1 + num2;
             case "-" -> resultado = num1 - num2;
-            case "*" -> resultado = num1 - num2;
+            case "*" -> resultado = num1 * num2;
             case "/" -> {
                 if (num2 == 0) {
                     mostrarTexto.setText("Error");
