@@ -7,6 +7,7 @@ package Programa;
 import java.awt.Image;
 import java.io.FileNotFoundException;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 /**
  *
@@ -21,7 +22,8 @@ public class Inicio extends javax.swing.JFrame {
      */
     public Inicio() {
         initComponents();
-     
+        setImages();
+        iconoPrograma();
     }
 
     /**
@@ -38,6 +40,7 @@ public class Inicio extends javax.swing.JFrame {
         boton3 = new javax.swing.JButton();
         boton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        icono = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -47,7 +50,6 @@ public class Inicio extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         boton2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        boton2.setText("Calculadora");
         boton2.setToolTipText("");
         boton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -55,32 +57,33 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         jPanel1.add(boton2);
-        boton2.setBounds(200, 110, 160, 153);
+        boton2.setBounds(200, 110, 160, 160);
 
         boton3.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        boton3.setText("Bloc de notas");
         boton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boton3ActionPerformed(evt);
             }
         });
         jPanel1.add(boton3);
-        boton3.setBounds(380, 110, 160, 153);
+        boton3.setBounds(380, 110, 160, 160);
 
         boton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        boton1.setText("Tareas");
+        boton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         boton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 boton1ActionPerformed(evt);
             }
         });
         jPanel1.add(boton1);
-        boton1.setBounds(20, 110, 160, 153);
+        boton1.setBounds(20, 110, 160, 160);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel1.setText("MultiTools");
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
+        jLabel1.setText("MULTI - TOOLS");
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(200, 20, 175, 30);
+        jLabel1.setBounds(110, 20, 230, 50);
+        jPanel1.add(icono);
+        icono.setBounds(350, 10, 60, 60);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,13 +102,31 @@ public class Inicio extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void iconoPrograma() {
+        ImageIcon iconoPrograma = new ImageIcon(getClass().getResource("/img/multitools.png"));
+        Image imagen = iconoPrograma.getImage().getScaledInstance(icono.getWidth(), icono.getHeight(), Image.SCALE_FAST);
+        icono.setIcon(new ImageIcon(imagen));
+    }
+    
+   private void setImages() {
+    setButtonImage(boton1, "/img/todolistIcon.png");
+    setButtonImage(boton2, "/img/calculadora.png");
+    setButtonImage(boton3, "/img/bloc.png");
+}
+
+    private void setButtonImage(javax.swing.JButton button, String imagePath) {
+    ImageIcon icon = new ImageIcon(getClass().getResource(imagePath));
+    Image img = icon.getImage().getScaledInstance(button.getWidth(), button.getHeight(), Image.SCALE_FAST);
+    button.setIcon(new ImageIcon(img));
+}
+
     
     private void boton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton3ActionPerformed
        BlocNotas newframe = new BlocNotas();
        newframe.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_boton3ActionPerformed
-
+    
     private void boton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton2ActionPerformed
         Calculadora newframe = new Calculadora();
         newframe.setVisible(true);
@@ -152,6 +173,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JButton boton1;
     private javax.swing.JButton boton2;
     private javax.swing.JButton boton3;
+    private javax.swing.JLabel icono;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
